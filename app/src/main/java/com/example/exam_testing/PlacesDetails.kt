@@ -27,7 +27,7 @@ class PlacesDetails : AppCompatActivity() {
 
 
         //setting navbar title
-        val navBarTitle = intent.getStringExtra(CustomViewHolder.PLACE_TITLE_KEY)
+        val navBarTitle = intent.getStringExtra(MainAdapter.CustomViewHolder.PLACE_TITLE_KEY)
         supportActionBar?.title = navBarTitle
 
 
@@ -41,7 +41,7 @@ class PlacesDetails : AppCompatActivity() {
 
     private fun fetchJson() {
 
-        val placeId = intent.getLongExtra(CustomViewHolder.PLACE_ID_KEY, -1)
+        val placeId = intent.getLongExtra(MainAdapter.CustomViewHolder.PLACE_ID_KEY, -1)
         val placeDetailUrl = "https://www.noforeignland.com/home/api/v1/place?id=" + placeId
 
         val client = OkHttpClient()
