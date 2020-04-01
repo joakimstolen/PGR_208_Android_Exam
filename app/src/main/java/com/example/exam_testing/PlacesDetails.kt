@@ -5,17 +5,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.Toast
+
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.exam_testing.databinding.PlacesDetailsRecyclerviewBinding
 import com.google.gson.GsonBuilder
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.places_details_recyclerview.*
 import kotlinx.android.synthetic.main.places_details_row.view.*
+import kotlinx.android.synthetic.main.places_info_row.view.*
 import okhttp3.*
 import java.io.IOException
 
 class PlacesDetails : AppCompatActivity() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,12 +33,11 @@ class PlacesDetails : AppCompatActivity() {
 
 
 
+
+
         //setting navbar title
         val navBarTitle = intent.getStringExtra(MainAdapter.CustomViewHolder.PLACE_TITLE_KEY)
         supportActionBar?.title = navBarTitle
-
-
-
 
 
         fetchJson()
@@ -56,6 +62,7 @@ class PlacesDetails : AppCompatActivity() {
 
                 runOnUiThread {
                     recyclerview_main.adapter = PlaceDetailAdapter(fromPlaceId)
+
                 }
 
 
@@ -80,6 +87,9 @@ class PlacesDetails : AppCompatActivity() {
             val layoutInflater = LayoutInflater.from(parent.context)
             val customView = layoutInflater.inflate(R.layout.places_details_row, parent, false)
 
+
+
+
             return PlaceDetailViewHolder(customView, fromPlaceId)
 
         }
@@ -89,6 +99,7 @@ class PlacesDetails : AppCompatActivity() {
             println(fromPlaceId.place.comments)
 
             val place = fromPlaceId.place
+
 
             holder.customView.textView_places_details_title.text = place.name
             holder.customView.textView_places_detail_comment.text = place.comments
@@ -116,6 +127,8 @@ class PlacesDetails : AppCompatActivity() {
             val PLACE_LON_KEY = "PLACE_LON_KEY"
             val PLACE_NAME_KEY = "PLACE_NAME_KEY"
 
+
+
         }
 
 
@@ -123,7 +136,7 @@ class PlacesDetails : AppCompatActivity() {
         init {
 
 
-            customView.textView_places_details_title.setOnClickListener {
+            customView.button_places_detail_showmap.setOnClickListener {
                 println("Attempt to load map")
 
                 val intent = Intent(customView.context, MapsActivity::class.java)
@@ -133,14 +146,12 @@ class PlacesDetails : AppCompatActivity() {
                 intent.putExtra(PLACE_NAME_KEY, fromPlaceId?.place?.name)
 
                 customView.context.startActivity(intent)
+
+                
             }
-
-
-
-
-
-
         }
+
+
 
     }
 }

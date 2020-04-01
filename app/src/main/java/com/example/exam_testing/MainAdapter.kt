@@ -100,13 +100,13 @@ class MainAdapter(val places: Places, private var placeListFull: MutableList<Fea
 
                 intent.putExtra(PLACE_TITLE_KEY, feature?.properties?.name)
                 intent.putExtra(PLACE_ID_KEY, feature?.properties?.id)
-                intent.putExtra(BUTTON_MAIN_MAP, R.id.button_places_map_main)
+
 
                 view.context.startActivity(intent)
             }
-
-
         }
+
+
 
     }
 }
