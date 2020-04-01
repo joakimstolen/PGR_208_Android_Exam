@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "Welcome", Toast.LENGTH_LONG).show()
 
         recyclerview_main.layoutManager = LinearLayoutManager(this)
-        //recyclerview_main.adapter = MainAdapter()
+
 
         fetchJson()
     }

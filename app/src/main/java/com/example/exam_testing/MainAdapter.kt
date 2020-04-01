@@ -14,6 +14,8 @@ class MainAdapter(val places: Places, private var placeListFull: MutableList<Fea
 
     private var featureListToShow: MutableList<Feature> = mutableListOf()
 
+
+
     init {
         featureListToShow = placeListFull as MutableList<Feature>
     }
@@ -83,23 +85,34 @@ class MainAdapter(val places: Places, private var placeListFull: MutableList<Fea
 
     class CustomViewHolder(
         val view: View,
-        var feature: Feature? = null,
-        var fromPlaceId: FromPlaceId? = null
+        var feature: Feature? = null
     ) : RecyclerView.ViewHolder(view) {
 
         companion object {
             val PLACE_TITLE_KEY = "PLACE_TITLE"
             val PLACE_ID_KEY = "PLACE_ID"
-            val PLACE_LAT_KEY_MAIN = "PLACE_LAT_KEY"
-            val BUTTON_MAIN_MAP = "PLACE_LON_KEY"
         }
 
         init {
+
+            //launch detailpage of each place
             view.setOnClickListener {
                 val intent = Intent(view.context, PlacesDetails::class.java)
 
                 intent.putExtra(PLACE_TITLE_KEY, feature?.properties?.name)
                 intent.putExtra(PLACE_ID_KEY, feature?.properties?.id)
+
+
+                view.context.startActivity(intent)
+            }
+
+            //launch map-location for each place
+            view.button_launch_map.setOnClickListener {
+                val intent = Intent(view.context, MapsActivity::class.java)
+
+
+                intent.putExtra(PlacesDetails.PlaceDetailViewHolder.PLACE_LAT_KEY, feature?.geometry?.coordinates?.elementAt(1))
+                intent.putExtra(PlacesDetails.PlaceDetailViewHolder.PLACE_LON_KEY, feature?.geometry?.coordinates?.elementAt(0))
 
 
                 view.context.startActivity(intent)

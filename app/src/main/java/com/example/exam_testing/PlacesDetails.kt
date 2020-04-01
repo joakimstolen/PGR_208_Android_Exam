@@ -63,6 +63,7 @@ class PlacesDetails : AppCompatActivity() {
                 runOnUiThread {
                     recyclerview_main.adapter = PlaceDetailAdapter(fromPlaceId)
 
+
                 }
 
 
@@ -88,6 +89,7 @@ class PlacesDetails : AppCompatActivity() {
             val customView = layoutInflater.inflate(R.layout.places_details_row, parent, false)
 
 
+            println(fromPlaceId.place.name)
 
 
             return PlaceDetailViewHolder(customView, fromPlaceId)
@@ -147,8 +149,9 @@ class PlacesDetails : AppCompatActivity() {
 
                 customView.context.startActivity(intent)
 
-                
             }
+
+
         }
 
 

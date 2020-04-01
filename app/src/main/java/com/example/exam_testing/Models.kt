@@ -2,9 +2,9 @@ package com.example.exam_testing
 
 class Places(val features : List<Feature>)
 
-class Feature(val type : String, val properties: Properties, geometry: Geometry)
+class Feature(val type : String, val properties: Properties, val geometry: Geometry)
 
-class Geometry(val type : String, val coordinates : Float)
+class Geometry(val type : String, val coordinates : ArrayList<Double>)
 
 class Properties(val name : String, val icon : String, val id : Long)
 

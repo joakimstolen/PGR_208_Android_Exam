@@ -94,6 +94,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         val lat = intent.getDoubleExtra(PlacesDetails.PlaceDetailViewHolder.PLACE_LAT_KEY, -1.0)
         val lon = intent.getDoubleExtra(PlacesDetails.PlaceDetailViewHolder.PLACE_LON_KEY, -1.0)
 
+
+
         if (ActivityCompat.checkSelfPermission(this,
                 android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
