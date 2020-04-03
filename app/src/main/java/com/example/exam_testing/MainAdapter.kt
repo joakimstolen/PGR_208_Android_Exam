@@ -10,6 +10,7 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.places_info_row.view.*
 
+
 class MainAdapter(val places: Places, private var placeListFull: MutableList<Feature> = mutableListOf()) : RecyclerView.Adapter<MainAdapter.CustomViewHolder?>(), Filterable {
 
     private var featureListToShow: MutableList<Feature> = mutableListOf()
@@ -91,6 +92,7 @@ class MainAdapter(val places: Places, private var placeListFull: MutableList<Fea
         companion object {
             val PLACE_TITLE_KEY = "PLACE_TITLE"
             val PLACE_ID_KEY = "PLACE_ID"
+
         }
 
         init {
@@ -113,7 +115,7 @@ class MainAdapter(val places: Places, private var placeListFull: MutableList<Fea
 
                 intent.putExtra(PlacesDetails.PlaceDetailViewHolder.PLACE_LAT_KEY, feature?.geometry?.coordinates?.elementAt(1))
                 intent.putExtra(PlacesDetails.PlaceDetailViewHolder.PLACE_LON_KEY, feature?.geometry?.coordinates?.elementAt(0))
-
+                intent.putExtra(PlacesDetails.PlaceDetailViewHolder.PLACE_NAME_KEY, feature?.properties?.name)
 
                 view.context.startActivity(intent)
             }
