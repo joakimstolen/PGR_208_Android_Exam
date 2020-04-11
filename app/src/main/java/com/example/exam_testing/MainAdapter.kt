@@ -21,6 +21,8 @@ class MainAdapter(val places: Places, private var placeListFull: MutableList<Fea
         featureListToShow = placeListFull as MutableList<Feature>
     }
 
+
+
     //number of items showed
     override fun getItemCount(): Int {
         return featureListToShow.size
