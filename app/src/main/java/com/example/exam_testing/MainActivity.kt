@@ -103,6 +103,7 @@ class MainActivity : AppCompatActivity() {
 
                         }
                         thread.start()
+
                     }
                 }
 
