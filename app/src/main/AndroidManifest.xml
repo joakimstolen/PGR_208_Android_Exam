@@ -34,12 +34,12 @@
 
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".Activity.MapsActivity"
             android:label="@string/title_activity_maps">
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".PlacesDetails" />
+                android:value=".Activity.PlacesActivity" />
         </activity>
 
 
@@ -54,16 +54,16 @@
         </activity>
 
 
-        <activity android:name=".MainActivity" android:windowSoftInputMode="adjustPan"/>
+        <activity android:name=".Activity.MainActivity" android:windowSoftInputMode="adjustPan"/>
 
 
         <activity
-            android:name=".PlacesDetails"
+            android:name=".Activity.PlacesActivity"
             android:label="Place details"
             android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".Activity.MainActivity" />
         </activity>
 
 

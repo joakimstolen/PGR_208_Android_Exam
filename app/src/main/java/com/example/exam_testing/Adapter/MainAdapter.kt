@@ -1,4 +1,4 @@
-package com.example.exam_testing
+package com.example.exam_testing.Adapter
 
 
 import android.content.Intent
@@ -8,6 +8,11 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
+import com.example.exam_testing.Activity.MapsActivity
+import com.example.exam_testing.Data.Feature
+import com.example.exam_testing.Data.Places
+import com.example.exam_testing.Activity.PlacesActivity
+import com.example.exam_testing.R
 import kotlinx.android.synthetic.main.places_info_row.view.*
 
 
@@ -31,7 +36,9 @@ class MainAdapter(val places: Places, private var placeListFull: MutableList<Fea
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val cellForRow = layoutInflater.inflate(R.layout.places_info_row, parent, false)
-        return CustomViewHolder(cellForRow)
+        return CustomViewHolder(
+            cellForRow
+        )
     }
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
@@ -101,7 +108,7 @@ class MainAdapter(val places: Places, private var placeListFull: MutableList<Fea
 
             //launch detailpage of each place
             view.setOnClickListener {
-                val intent = Intent(view.context, PlacesDetails::class.java)
+                val intent = Intent(view.context, PlacesActivity::class.java)
 
                 intent.putExtra(PLACE_TITLE_KEY, feature?.properties?.name)
                 intent.putExtra(PLACE_ID_KEY, feature?.properties?.id)
@@ -115,9 +122,9 @@ class MainAdapter(val places: Places, private var placeListFull: MutableList<Fea
                 val intent = Intent(view.context, MapsActivity::class.java)
 
 
-                intent.putExtra(PlacesDetails.PlaceDetailViewHolder.PLACE_LAT_KEY, feature?.geometry?.coordinates?.elementAt(1))
-                intent.putExtra(PlacesDetails.PlaceDetailViewHolder.PLACE_LON_KEY, feature?.geometry?.coordinates?.elementAt(0))
-                intent.putExtra(PlacesDetails.PlaceDetailViewHolder.PLACE_NAME_KEY, feature?.properties?.name)
+                intent.putExtra(PlacesActivity.PlaceDetailViewHolder.PLACE_LAT_KEY, feature?.geometry?.coordinates?.elementAt(1))
+                intent.putExtra(PlacesActivity.PlaceDetailViewHolder.PLACE_LON_KEY, feature?.geometry?.coordinates?.elementAt(0))
+                intent.putExtra(PlacesActivity.PlaceDetailViewHolder.PLACE_NAME_KEY, feature?.properties?.name)
 
                 view.context.startActivity(intent)
             }

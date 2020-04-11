@@ -1,4 +1,4 @@
-package com.example.exam_testing
+package com.example.exam_testing.Activity
 
 import android.content.pm.PackageManager
 import android.location.Address
@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.example.exam_testing.R
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -46,7 +47,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
 
-        val navBarTitle = intent.getStringExtra(PlacesDetails.PlaceDetailViewHolder.PLACE_NAME_KEY)
+        val navBarTitle = intent.getStringExtra(PlacesActivity.PlaceDetailViewHolder.PLACE_NAME_KEY)
         supportActionBar?.title = navBarTitle
 
 
@@ -66,8 +67,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
 
 
-        val lat = intent.getDoubleExtra(PlacesDetails.PlaceDetailViewHolder.PLACE_LAT_KEY, -1.0)
-        val lon = intent.getDoubleExtra(PlacesDetails.PlaceDetailViewHolder.PLACE_LON_KEY, -1.0)
+        val lat = intent.getDoubleExtra(PlacesActivity.PlaceDetailViewHolder.PLACE_LAT_KEY, -1.0)
+        val lon = intent.getDoubleExtra(PlacesActivity.PlaceDetailViewHolder.PLACE_LON_KEY, -1.0)
 
         //map.isMyLocationEnabled = true
 
@@ -91,15 +92,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
     private fun setUpMap() {
 
-        val lat = intent.getDoubleExtra(PlacesDetails.PlaceDetailViewHolder.PLACE_LAT_KEY, -1.0)
-        val lon = intent.getDoubleExtra(PlacesDetails.PlaceDetailViewHolder.PLACE_LON_KEY, -1.0)
+        val lat = intent.getDoubleExtra(PlacesActivity.PlaceDetailViewHolder.PLACE_LAT_KEY, -1.0)
+        val lon = intent.getDoubleExtra(PlacesActivity.PlaceDetailViewHolder.PLACE_LON_KEY, -1.0)
 
 
 
         if (ActivityCompat.checkSelfPermission(this,
                 android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
-                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                LOCATION_PERMISSION_REQUEST_CODE
+            )
             return
         }
 
@@ -127,8 +130,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
     private fun getAddress(latLng: LatLng): String {
 
-        val lat = intent.getDoubleExtra(PlacesDetails.PlaceDetailViewHolder.PLACE_LAT_KEY, -1.0)
-        val lon = intent.getDoubleExtra(PlacesDetails.PlaceDetailViewHolder.PLACE_LON_KEY, -1.0)
+        val lat = intent.getDoubleExtra(PlacesActivity.PlaceDetailViewHolder.PLACE_LAT_KEY, -1.0)
+        val lon = intent.getDoubleExtra(PlacesActivity.PlaceDetailViewHolder.PLACE_LON_KEY, -1.0)
 
         // 1
         val geocoder = Geocoder(this@MapsActivity, Locale.getDefault())

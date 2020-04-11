@@ -1,4 +1,4 @@
-package com.example.exam_testing
+package com.example.exam_testing.Activity
 
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +10,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
+import com.example.exam_testing.Adapter.MainAdapter
+import com.example.exam_testing.Data.Feature
+import com.example.exam_testing.Data.PlaceDatabase
+import com.example.exam_testing.Data.PlaceEntity
+import com.example.exam_testing.Data.Places
+import com.example.exam_testing.R
 import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_main.*
 import okhttp3.*
@@ -94,7 +100,8 @@ class MainActivity : AppCompatActivity() {
                     for (position in places.features.indices){
                         val feature = places.features.get(position)
                         val thread = Thread {
-                            var placeEntity = PlaceEntity()
+                            var placeEntity =
+                                PlaceEntity()
                             placeEntity.id = feature.properties.id
                             placeEntity.name = feature.properties.name
                             placeEntity.lon = feature.geometry.coordinates[0]
@@ -109,7 +116,10 @@ class MainActivity : AppCompatActivity() {
 
 
                 runOnUiThread{
-                    adapter = MainAdapter(places, places.features as MutableList<Feature>)
+                    adapter = MainAdapter(
+                        places,
+                        places.features as MutableList<Feature>
+                    )
                     recyclerview_main.adapter = adapter
                     adapter!!.notifyDataSetChanged()
                 }

@@ -1,27 +1,22 @@
-package com.example.exam_testing
+package com.example.exam_testing.Activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Toast
-
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
+import com.example.exam_testing.Adapter.MainAdapter
+import com.example.exam_testing.Adapter.PlaceActivityAdapter
+import com.example.exam_testing.Data.FromPlaceId
+import com.example.exam_testing.R
 import com.google.gson.GsonBuilder
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.places_details_recyclerview.*
 import kotlinx.android.synthetic.main.places_details_row.view.*
-import kotlinx.android.synthetic.main.places_info_row.view.*
 import okhttp3.*
 import java.io.IOException
 
-class PlacesDetails : AppCompatActivity() {
+class PlacesActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,7 +56,10 @@ class PlacesDetails : AppCompatActivity() {
                 val fromPlaceId = gson.fromJson(body, FromPlaceId::class.java)
 
                 runOnUiThread {
-                    recyclerview_main.adapter = PlaceDetailAdapter(fromPlaceId)
+                    recyclerview_main.adapter =
+                        PlaceActivityAdapter(
+                            fromPlaceId
+                        )
 
 
                 }
@@ -78,49 +76,7 @@ class PlacesDetails : AppCompatActivity() {
 
 
 
-    private class PlaceDetailAdapter(val fromPlaceId: FromPlaceId): RecyclerView.Adapter<PlaceDetailViewHolder>(){
 
-        override fun getItemCount(): Int {
-            return 1
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceDetailViewHolder {
-            val layoutInflater = LayoutInflater.from(parent.context)
-            val customView = layoutInflater.inflate(R.layout.places_details_row, parent, false)
-
-
-            println(fromPlaceId.place.name)
-
-
-            return PlaceDetailViewHolder(customView, fromPlaceId)
-
-        }
-
-        override fun onBindViewHolder(holder: PlaceDetailViewHolder, position: Int) {
-
-            println(fromPlaceId.place.comments)
-
-            val place = fromPlaceId.place
-
-
-            holder.customView.textView_places_details_title.text = place.name
-            holder.customView.textView_places_detail_comment.text = place.comments
-
-            val bannerImageView = holder.customView.imageView_places_detail_banner
-            val bannerUrl = place.banner
-
-            val defaultImageUrl = "https://i.imgur.com/JjEYAyS.jpg"
-
-            if (bannerUrl.isEmpty()){
-                Picasso.get().load(defaultImageUrl).into(bannerImageView)
-            } else {
-                Picasso.get().load(bannerUrl).into(bannerImageView)
-            }
-
-
-        }
-
-    }
 
     class PlaceDetailViewHolder(val customView: View, var fromPlaceId: FromPlaceId? = null): RecyclerView.ViewHolder(customView) {
 
@@ -132,7 +88,6 @@ class PlacesDetails : AppCompatActivity() {
 
 
         }
-
 
 
         init {
