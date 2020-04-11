@@ -69,7 +69,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         val lat = intent.getDoubleExtra(PlacesDetails.PlaceDetailViewHolder.PLACE_LAT_KEY, -1.0)
         val lon = intent.getDoubleExtra(PlacesDetails.PlaceDetailViewHolder.PLACE_LON_KEY, -1.0)
 
-        map.isMyLocationEnabled = true
+        //map.isMyLocationEnabled = true
 
         fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
             if (location != null){
@@ -103,7 +103,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
             return
         }
 
-        map.isMyLocationEnabled = true
+        //map.isMyLocationEnabled = true
 
         fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
             // Got last known location. In some rare situations this can be null.
