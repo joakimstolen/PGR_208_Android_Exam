@@ -18,12 +18,12 @@ import kotlinx.android.synthetic.main.places_info_row.view.*
 
 class MainAdapter(val places: Places, private var placeListFull: MutableList<PlaceEntity> = mutableListOf()) : RecyclerView.Adapter<MainAdapter.CustomViewHolder?>(), Filterable {
 
-    private var featureListToShow: MutableList<PlaceEntity> = mutableListOf()
+    private var placeEntityListToShow: MutableList<PlaceEntity> = mutableListOf()
 
 
 
     init {
-        featureListToShow = placeListFull as MutableList<PlaceEntity>
+        placeEntityListToShow = placeListFull as MutableList<PlaceEntity>
     }
 
 
@@ -32,7 +32,7 @@ class MainAdapter(val places: Places, private var placeListFull: MutableList<Pla
 
     //number of items showed
     override fun getItemCount(): Int {
-        return featureListToShow.size
+        return placeEntityListToShow.size
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomViewHolder {
@@ -45,7 +45,7 @@ class MainAdapter(val places: Places, private var placeListFull: MutableList<Pla
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         //val placeTitles = placeTitles.get(position)
-        val placeEntity = featureListToShow.get(position)
+        val placeEntity = placeEntityListToShow.get(position)
 
         holder.view.textView_place_name.text = placeEntity.name
 
@@ -85,10 +85,10 @@ class MainAdapter(val places: Places, private var placeListFull: MutableList<Pla
         override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
 
             results?.values.let {
-                featureListToShow = it as MutableList<PlaceEntity>
+                placeEntityListToShow = it as MutableList<PlaceEntity>
             }
             notifyDataSetChanged()
-            println(featureListToShow)
+            println(placeEntityListToShow)
         }
 
 

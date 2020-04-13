@@ -60,6 +60,8 @@ class PlacesActivity : AppCompatActivity() {
                 val gson = GsonBuilder().create()
                 val fromPlaceId = gson.fromJson(body, FromPlaceId::class.java)
 
+
+
                 runOnUiThread {
                     recyclerview_main.adapter =
                         PlaceActivityAdapter(
