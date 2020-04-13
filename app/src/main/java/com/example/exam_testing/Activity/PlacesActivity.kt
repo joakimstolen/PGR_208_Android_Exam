@@ -2,6 +2,7 @@ package com.example.exam_testing.Activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,9 +28,7 @@ class PlacesActivity : AppCompatActivity() {
 
         recyclerview_main.layoutManager = LinearLayoutManager(this)
 
-
-
-
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         //setting navbar title
         val navBarTitle = intent.getStringExtra(MainAdapter.CustomViewHolder.PLACE_TITLE_KEY)
@@ -37,6 +36,11 @@ class PlacesActivity : AppCompatActivity() {
 
 
         fetchJson()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return super.onOptionsItemSelected(item)
+
     }
 
 

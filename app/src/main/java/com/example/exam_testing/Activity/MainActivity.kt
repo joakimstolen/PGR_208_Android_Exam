@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.exam_testing.Adapter.MainAdapter
-import com.example.exam_testing.Data.Feature
 import com.example.exam_testing.Data.PlaceDatabase
 import com.example.exam_testing.Data.PlaceEntity
 import com.example.exam_testing.Data.Places
@@ -38,6 +37,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
+
+        println("oncreate called")
 
         Toast.makeText(this, "Welcome", Toast.LENGTH_LONG).show()
 
@@ -77,7 +80,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun fetchJson() {
 
-        val db = Room.databaseBuilder(applicationContext, PlaceDatabase::class.java, "PlacesDatabaseReal.db").build()
+        val db = Room.databaseBuilder(applicationContext, PlaceDatabase::class.java, "PlacesDatabaseReal.db").allowMainThreadQueries().build()
+        val getPlaces = db.placeDao().getAllPlaces()
 
         val url = "https://www.noforeignland.com/home/api/v1/places/"
 
@@ -116,9 +120,10 @@ class MainActivity : AppCompatActivity() {
 
 
                 runOnUiThread{
+                    println("Loading data from database")
                     adapter = MainAdapter(
                         places,
-                        places.features as MutableList<Feature>
+                        getPlaces as MutableList<PlaceEntity>
                     )
                     recyclerview_main.adapter = adapter
                     adapter!!.notifyDataSetChanged()

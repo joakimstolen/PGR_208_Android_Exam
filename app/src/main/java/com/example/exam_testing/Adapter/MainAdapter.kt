@@ -9,22 +9,24 @@ import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.exam_testing.Activity.MapsActivity
-import com.example.exam_testing.Data.Feature
-import com.example.exam_testing.Data.Places
 import com.example.exam_testing.Activity.PlacesActivity
+import com.example.exam_testing.Data.PlaceEntity
+import com.example.exam_testing.Data.Places
 import com.example.exam_testing.R
 import kotlinx.android.synthetic.main.places_info_row.view.*
 
 
-class MainAdapter(val places: Places, private var placeListFull: MutableList<Feature> = mutableListOf()) : RecyclerView.Adapter<MainAdapter.CustomViewHolder?>(), Filterable {
+class MainAdapter(val places: Places, private var placeListFull: MutableList<PlaceEntity> = mutableListOf()) : RecyclerView.Adapter<MainAdapter.CustomViewHolder?>(), Filterable {
 
-    private var featureListToShow: MutableList<Feature> = mutableListOf()
+    private var featureListToShow: MutableList<PlaceEntity> = mutableListOf()
 
 
 
     init {
-        featureListToShow = placeListFull as MutableList<Feature>
+        featureListToShow = placeListFull as MutableList<PlaceEntity>
     }
+
+
 
 
 
@@ -43,11 +45,11 @@ class MainAdapter(val places: Places, private var placeListFull: MutableList<Fea
 
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         //val placeTitles = placeTitles.get(position)
-        val feature = featureListToShow.get(position)
+        val placeEntity = featureListToShow.get(position)
 
-        holder.view.textView_place_name.text = feature.properties.name
+        holder.view.textView_place_name.text = placeEntity.name
 
-        holder.feature = feature
+        holder.placeEntity = placeEntity
 
     }
 
@@ -57,17 +59,17 @@ class MainAdapter(val places: Places, private var placeListFull: MutableList<Fea
 
     private val placeFilter: Filter = object : Filter() {
         override fun performFiltering(constraint: CharSequence?): FilterResults? {
-            var aFilteredList: MutableList<Feature> = mutableListOf()
+            var aFilteredList: MutableList<PlaceEntity> = mutableListOf()
             if (constraint == null || constraint.isEmpty()) {
-                aFilteredList = placeListFull as MutableList<Feature>
+                aFilteredList = placeListFull as MutableList<PlaceEntity>
 
             } else {
                 aFilteredList = placeListFull.filter {
-                    it.properties.name.contains(
+                    it.name.contains(
                         constraint.toString(),
                         ignoreCase = true
                     )
-                } as MutableList<Feature>
+                } as MutableList<PlaceEntity>
 
                 println(aFilteredList)
 
@@ -83,7 +85,7 @@ class MainAdapter(val places: Places, private var placeListFull: MutableList<Fea
         override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
 
             results?.values.let {
-                featureListToShow = it as MutableList<Feature>
+                featureListToShow = it as MutableList<PlaceEntity>
             }
             notifyDataSetChanged()
             println(featureListToShow)
@@ -95,7 +97,7 @@ class MainAdapter(val places: Places, private var placeListFull: MutableList<Fea
 
     class CustomViewHolder(
         val view: View,
-        var feature: Feature? = null
+        var placeEntity: PlaceEntity? = null
     ) : RecyclerView.ViewHolder(view) {
 
         companion object {
@@ -110,8 +112,8 @@ class MainAdapter(val places: Places, private var placeListFull: MutableList<Fea
             view.setOnClickListener {
                 val intent = Intent(view.context, PlacesActivity::class.java)
 
-                intent.putExtra(PLACE_TITLE_KEY, feature?.properties?.name)
-                intent.putExtra(PLACE_ID_KEY, feature?.properties?.id)
+                intent.putExtra(PLACE_TITLE_KEY, placeEntity?.name)
+                intent.putExtra(PLACE_ID_KEY, placeEntity?.id)
 
 
                 view.context.startActivity(intent)
@@ -122,9 +124,9 @@ class MainAdapter(val places: Places, private var placeListFull: MutableList<Fea
                 val intent = Intent(view.context, MapsActivity::class.java)
 
 
-                intent.putExtra(PlacesActivity.PlaceDetailViewHolder.PLACE_LAT_KEY, feature?.geometry?.coordinates?.elementAt(1))
-                intent.putExtra(PlacesActivity.PlaceDetailViewHolder.PLACE_LON_KEY, feature?.geometry?.coordinates?.elementAt(0))
-                intent.putExtra(PlacesActivity.PlaceDetailViewHolder.PLACE_NAME_KEY, feature?.properties?.name)
+                intent.putExtra(PlacesActivity.PlaceDetailViewHolder.PLACE_LAT_KEY, placeEntity?.lat)
+                intent.putExtra(PlacesActivity.PlaceDetailViewHolder.PLACE_LON_KEY, placeEntity?.lon)
+                intent.putExtra(PlacesActivity.PlaceDetailViewHolder.PLACE_NAME_KEY, placeEntity?.name)
 
                 view.context.startActivity(intent)
             }
