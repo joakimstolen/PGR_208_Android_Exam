@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -48,6 +49,8 @@ class MainActivity : AppCompatActivity() {
 
 
         fetchJson()
+
+
     }
 
 
@@ -111,23 +114,35 @@ class MainActivity : AppCompatActivity() {
                             placeEntity.lon = feature.geometry.coordinates[0]
                             placeEntity.lat = feature.geometry.coordinates[1]
                             db.placeDao().savePlaces(placeEntity)
-
                         }
-                        thread.start()
 
+                        thread.start()
                     }
+
+                    finish()
+                    overridePendingTransition(0 ,0)
+                    startActivity(intent)
+                    overridePendingTransition(0 ,0)
+
                 }
+
+
 
 
                 runOnUiThread{
                     println("Loading data from database")
+
                     adapter = MainAdapter(
                         places,
                         getPlaces as MutableList<PlaceEntity>
                     )
                     recyclerview_main.adapter = adapter
                     adapter!!.notifyDataSetChanged()
+
                 }
+
+
+
             }
 
             override fun onFailure(call: Call, e: IOException) {
@@ -135,4 +150,5 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
 }
