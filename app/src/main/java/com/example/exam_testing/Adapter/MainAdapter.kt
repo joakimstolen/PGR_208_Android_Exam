@@ -47,7 +47,12 @@ class MainAdapter(val places: Places, private var placeListFull: MutableList<Pla
         //val placeTitles = placeTitles.get(position)
         val placeEntity = placeEntityListToShow.get(position)
 
+        val lonitudeText = "Lonitude: " + placeEntity.lon.toString()
+        val latitudeText = "Latitude: " + placeEntity.lat.toString()
+
         holder.view.textView_place_name.text = placeEntity.name
+        holder.view.textView_lat_info.text = latitudeText
+        holder.view.textView_lon_info.text = lonitudeText
 
         holder.placeEntity = placeEntity
 

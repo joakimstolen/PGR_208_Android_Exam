@@ -42,13 +42,13 @@ class MainActivity : AppCompatActivity() {
 
 
         println("oncreate called")
-
-        Toast.makeText(this, "Welcome", Toast.LENGTH_LONG).show()
+        
 
         recyclerview_main.layoutManager = LinearLayoutManager(this)
 
 
         fetchJson()
+        Toast.makeText(this, "Loading...", Toast.LENGTH_LONG).show()
 
 
     }
@@ -104,6 +104,7 @@ class MainActivity : AppCompatActivity() {
                 if (db.placeDao().getAllPlaces().isEmpty()){
                     println("Storing data to local")
 
+
                     for (position in places.features.indices){
                         val feature = places.features.get(position)
                         val thread = Thread {
@@ -114,6 +115,7 @@ class MainActivity : AppCompatActivity() {
                             placeEntity.lon = feature.geometry.coordinates[0]
                             placeEntity.lat = feature.geometry.coordinates[1]
                             db.placeDao().savePlaces(placeEntity)
+
                         }
 
                         thread.start()
