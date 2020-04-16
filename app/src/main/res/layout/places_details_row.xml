@@ -9,6 +9,7 @@
     <TextView
         android:id="@+id/textView_places_details_title"
         android:layout_width="0dp"
+        android:fontFamily="monospace"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -45,6 +46,7 @@
     <TextView
         android:id="@+id/textView_places_detail_comment"
         android:layout_width="0dp"
+        android:fontFamily="monospace"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -69,6 +71,7 @@
 
     <TextView
         android:id="@+id/textView"
+        android:fontFamily="monospace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

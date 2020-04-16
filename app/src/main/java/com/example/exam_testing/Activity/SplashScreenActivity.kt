@@ -53,7 +53,7 @@ class SplashScreenActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call, response: Response) {
                 val body = response.body?.string()
-                println(body)
+                //println(body)
 
                 val gson = GsonBuilder().create()
                 val places = gson.fromJson(body, Places::class.java)

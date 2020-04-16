@@ -8,6 +8,7 @@
 
     <TextView
         android:id="@+id/textView_place_name"
+        android:fontFamily="monospace"
         android:layout_width="338dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -27,6 +28,7 @@
 
     <TextView
         android:id="@+id/textView5"
+        android:fontFamily="monospace"
         android:layout_width="0dp"
         android:layout_height="2dp"
         android:background="#000000"
@@ -52,6 +54,7 @@
         android:id="@+id/textView_show_map_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="monospace"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
@@ -75,6 +78,7 @@
     <TextView
         android:id="@+id/textView_lon_info"
         android:layout_width="wrap_content"
+        android:fontFamily="monospace"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
