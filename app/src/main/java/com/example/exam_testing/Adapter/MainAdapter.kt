@@ -11,12 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.exam_testing.Activity.MapsActivity
 import com.example.exam_testing.Activity.PlacesActivity
 import com.example.exam_testing.Data.PlaceEntity
-import com.example.exam_testing.Data.Places
 import com.example.exam_testing.R
 import kotlinx.android.synthetic.main.places_info_row.view.*
 
 
-class MainAdapter(val places: Places, private var placeListFull: MutableList<PlaceEntity> = mutableListOf()) : RecyclerView.Adapter<MainAdapter.CustomViewHolder?>(), Filterable {
+class MainAdapter(private var placeListFull: MutableList<PlaceEntity> = mutableListOf()) : RecyclerView.Adapter<MainAdapter.CustomViewHolder?>(), Filterable {
 
     private var placeEntityListToShow: MutableList<PlaceEntity> = mutableListOf()
 

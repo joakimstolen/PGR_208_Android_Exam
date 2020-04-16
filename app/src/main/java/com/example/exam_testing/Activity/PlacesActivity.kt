@@ -55,6 +55,7 @@ class PlacesActivity : AppCompatActivity() {
         client.newCall(request).enqueue(object: Callback {
 
             override fun onResponse(call: Call, response: Response) {
+                println("onResponse for individual place called")
                 val body = response.body?.string()
 
                 val gson = GsonBuilder().create()

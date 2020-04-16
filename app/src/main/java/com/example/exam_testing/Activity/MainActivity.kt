@@ -1,7 +1,6 @@
 package com.example.exam_testing.Activity
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.inputmethod.EditorInfo
@@ -13,12 +12,8 @@ import androidx.room.Room
 import com.example.exam_testing.Adapter.MainAdapter
 import com.example.exam_testing.Data.PlaceDatabase
 import com.example.exam_testing.Data.PlaceEntity
-import com.example.exam_testing.Data.Places
 import com.example.exam_testing.R
-import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.activity_main.*
-import okhttp3.*
-import java.io.IOException
 
 
 
@@ -47,10 +42,28 @@ class MainActivity : AppCompatActivity() {
         recyclerview_main.layoutManager = LinearLayoutManager(this)
 
 
-        fetchJson()
+        renderLocation()
+
         Toast.makeText(this, "Loading...", Toast.LENGTH_LONG).show()
 
 
+    }
+
+    private fun renderLocation(){
+
+        val db = Room.databaseBuilder(applicationContext, PlaceDatabase::class.java, "PlacesDatabaseReal.db").allowMainThreadQueries().build()
+        val getPlaces = db.placeDao().getAllPlaces()
+
+        runOnUiThread{
+            println("Loading data from database")
+
+            adapter = MainAdapter(
+                getPlaces as MutableList<PlaceEntity>
+            )
+            recyclerview_main.adapter = adapter
+            adapter!!.notifyDataSetChanged()
+
+        }
     }
 
 
@@ -81,76 +94,5 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    private fun fetchJson() {
-
-        val db = Room.databaseBuilder(applicationContext, PlaceDatabase::class.java, "PlacesDatabaseReal.db").allowMainThreadQueries().build()
-        val getPlaces = db.placeDao().getAllPlaces()
-
-        val url = "https://www.noforeignland.com/home/api/v1/places/"
-
-        val request = Request.Builder().url(url).build()
-
-        val client = OkHttpClient()
-        client.newCall(request).enqueue(object: Callback{
-
-            override fun onResponse(call: Call, response: Response) {
-                val body = response.body?.string()
-                println(body)
-
-                val gson = GsonBuilder().create()
-                val places = gson.fromJson(body, Places::class.java)
-
-
-                if (db.placeDao().getAllPlaces().isEmpty()){
-                    println("Storing data to local")
-
-
-                    for (position in places.features.indices){
-                        val feature = places.features.get(position)
-                        val thread = Thread {
-                            var placeEntity =
-                                PlaceEntity()
-                            placeEntity.id = feature.properties.id
-                            placeEntity.name = feature.properties.name
-                            placeEntity.lon = feature.geometry.coordinates[0]
-                            placeEntity.lat = feature.geometry.coordinates[1]
-                            db.placeDao().savePlaces(placeEntity)
-
-                        }
-
-                        thread.start()
-                    }
-
-                    finish()
-                    overridePendingTransition(0 ,0)
-                    startActivity(intent)
-                    overridePendingTransition(0 ,0)
-
-                }
-
-
-
-
-                runOnUiThread{
-                    println("Loading data from database")
-
-                    adapter = MainAdapter(
-                        places,
-                        getPlaces as MutableList<PlaceEntity>
-                    )
-                    recyclerview_main.adapter = adapter
-                    adapter!!.notifyDataSetChanged()
-
-                }
-
-
-
-            }
-
-            override fun onFailure(call: Call, e: IOException) {
-                Log.d(TAG, "Failed to execute request")
-            }
-        })
-    }
 
 }

@@ -27,12 +27,6 @@ class PlaceEntity{
     @ColumnInfo(name = "placeName")
     var name: String = ""
 
-    @ColumnInfo(name = "comment")
-    var comments: String = ""
-
-    @ColumnInfo(name = "banner")
-    var banner: String = ""
-
     @ColumnInfo(name = "lat")
     var lat: Double = 0.0
 
