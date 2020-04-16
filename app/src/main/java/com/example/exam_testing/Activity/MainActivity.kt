@@ -5,7 +5,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.inputmethod.EditorInfo
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
@@ -43,9 +42,6 @@ class MainActivity : AppCompatActivity() {
 
 
         renderLocation()
-
-        Toast.makeText(this, "Loading...", Toast.LENGTH_LONG).show()
-
 
     }
 
