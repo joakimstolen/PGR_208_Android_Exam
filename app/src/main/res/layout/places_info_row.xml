@@ -10,12 +10,12 @@
 
     <TextView
         android:id="@+id/textView_place_name"
-        android:layout_width="338dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:fontFamily="monospace"
         android:text="Place name"
         android:textColor="#000000"
@@ -23,7 +23,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_launch_map"
+        app:layout_constraintEnd_toStartOf="@+id/textView_show_map_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.22000003" />
@@ -31,13 +31,13 @@
 
     <ImageButton
         android:id="@+id/button_launch_map"
-        android:background="@drawable/round_edges"
-        android:backgroundTint="@color/colorPrimary"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
+        android:background="@drawable/round_edges"
+        android:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_show_map_text"
@@ -48,8 +48,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:fontFamily="monospace"
         android:text="Show map"
         android:textColor="#414141"
@@ -58,7 +58,7 @@
 
     <TextView
         android:id="@+id/textView_lat_info"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
@@ -72,7 +72,7 @@
 
     <TextView
         android:id="@+id/textView_lon_info"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
